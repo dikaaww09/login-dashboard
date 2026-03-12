@@ -11,14 +11,15 @@ function ProductDetail() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const userData = localStorage.getItem("user");
-        if (!userData) {
-            navigate("/login");
-            return;
-        }
-        setUser(JSON.parse(userData));
-        fetchProductDetail();
-    }, [id, navigate]);
+    const userData = localStorage.getItem("user");
+    if (!userData) {
+        navigate("/login");
+        return;
+    }
+    setUser(JSON.parse(userData));
+    fetchProductDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [id, navigate]);
 
     const fetchProductDetail = async () => {
         try {
