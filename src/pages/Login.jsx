@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "../lib/supabaseClient";
 import "./Login.css";
 
 function Login() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -16,27 +16,25 @@ function Login() {
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:3001/auth/login", {
-                username,
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email,
                 password
             });
 
-            console.log("Response:", response.data);
+            if (error) throw error;
 
-            if (response.data.success) {
-                // Simpan data user ke localStorage
-                localStorage.setItem("token", response.data.token || "dummy-token");
-                localStorage.setItem("user", JSON.stringify(response.data.user));
+            if (data.user) {
+                const { data: userData } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('id', data.user.id)
+                    .single();
 
-                // Redirect ke dashboard
+                localStorage.setItem("user", JSON.stringify(userData));
                 navigate("/dashboard");
-            } else {
-                setError(response.data.message || "Login gagal");
             }
-
         } catch (err) {
-            console.error("Error:", err);
-            setError(err.response?.data?.message || "Server error");
+            setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -46,28 +44,45 @@ function Login() {
         <div className="login-container">
             <form className="login-form" onSubmit={handleLogin}>
                 <h2>Login</h2>
-
+                
                 {error && <div className="error-message">{error}</div>}
-
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-
+                
+                <div className="form-group">
+                    <label>EMAIL</label>
+                    <input
+                        type="email"
+                        placeholder="Masukkan email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                
+                <div className="form-group">
+                    <label>PASSWORD</label>
+                    <input
+                        type="password"
+                        placeholder="Masukkan password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                
                 <button type="submit" disabled={loading}>
-                    {loading ? "Loading..." : "Login"}
+                    {loading ? "Loading..." : "LOGIN"}
                 </button>
+                
+                <div className="login-footer">
+                    <p>
+                        Belum punya akun? 
+                        <Link to="/register">Daftar disini</Link>
+                    </p>
+                </div>
+                
+                <div className="copyright">
+                    © 2026 Toko Buku
+                </div>
             </form>
         </div>
     );

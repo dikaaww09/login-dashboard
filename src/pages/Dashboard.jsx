@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { supabase } from "../lib/supabaseClient";
 import ProductCard from "../components/ProductCard";
 import "./Dashboard.css";
 
@@ -11,29 +11,29 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
         const userData = localStorage.getItem("user");
         
-        if (!token) {
+        if (!userData) {
             navigate("/login");
             return;
         }
         
-        if (userData) {
-            setUser(JSON.parse(userData));
-        }
-
+        setUser(JSON.parse(userData));
         ambilProduk();
     }, [navigate]);
 
     const ambilProduk = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/api/products");
-            console.log("Data produk:", response.data);
+            const { data, error } = await supabase
+                .from('products')
+                .select('*, categories(name)')
+                .gt('stock', 0)
+                .order('id', { ascending: false });
+
+            if (error) throw error;
             
-            if (response.data.success) {
-                setProducts(response.data.data);
-            }
+            console.log("Data produk:", data);
+            setProducts(data || []);
         } catch (error) {
             console.error("Gagal ambil produk:", error);
         } finally {
@@ -41,8 +41,8 @@ function Dashboard() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         localStorage.removeItem("user");
         navigate("/login");
     };
@@ -54,10 +54,24 @@ function Dashboard() {
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                <h1>Dashboard Produk</h1>
+                <h1>Dashboard Toko Buku</h1>
                 <div className="user-info">
                     <span>Selamat datang, {user?.username || "Admin"}!</span>
-                    <button onClick={handleLogout} className="logout-btn">Logout</button>
+                    
+                    {user?.role === 'admin' && (
+                        <>
+                            <button onClick={() => navigate("/products")} className="manage-btn">
+                                Manajemen Produk
+                            </button>
+                            <button onClick={() => navigate("/users")} className="users-btn">
+                                Manajemen Users
+                            </button>
+                        </>
+                    )}
+                    
+                    <button onClick={handleLogout} className="logout-btn">
+                        Logout
+                    </button>
                 </div>
             </div>
             
@@ -66,12 +80,14 @@ function Dashboard() {
                     products.map(product => (
                         <ProductCard 
                             key={product.id}
-                            title={product.title}                          // <-- UBAH
-                            description={product.description || "Tidak ada deskripsi"} // <-- UBAH
-                            price={product.price?.toLocaleString() || "0"} // <-- UBAH
-                            image={product.cover_image || "https://via.placeholder.com/200x150?text=Buku"} // <-- UBAH
-                            author={product.author}                        // OPSIONAL
-                            stock={product.stock}                          // OPSIONAL
+                            id={product.id}  // <-- TAMBAHKAN INI!
+                            title={product.title}
+                            description={product.description || "Tidak ada deskripsi"}
+                            price={product.price?.toLocaleString() || "0"}
+                            image={product.cover_image || "https://via.placeholder.com/200x150?text=Buku"}
+                            author={product.author}
+                            stock={product.stock}
+                            category={product.categories?.name}
                         />
                     ))
                 ) : (
