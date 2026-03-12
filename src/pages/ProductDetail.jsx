@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import "./Dashboard.css";
+import "./ProductDetail.css";
 
 function ProductDetail() {
     const navigate = useNavigate();
@@ -60,7 +61,7 @@ function ProductDetail() {
                 <div className="user-info">
                     <span>Selamat datang, {user?.username || "Admin"}!</span>
                     <button onClick={handleBack} className="back-btn">
-                        ← Kembali ke Dashboard
+                         Kembali ke Dashboard
                     </button>
                 </div>
             </div>

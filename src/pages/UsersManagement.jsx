@@ -131,7 +131,7 @@ function UsersManagement() {
             <div className="dashboard-header">
                 <h1>Manajemen Users</h1>
                 <button onClick={() => navigate("/dashboard")} className="back-btn">
-                    ← Kembali ke Dashboard
+                     Kembali ke Dashboard
                 </button>
             </div>
 

@@ -205,7 +205,7 @@ function ProductManagement() {
                 <h1>📚 Manajemen Produk</h1>
                 <div>
                     <button onClick={() => navigate("/dashboard")} className="back-btn">
-                        ← Kembali ke Dashboard
+                         Kembali ke Dashboard
                     </button>
                     <button onClick={handleAddNew} className="add-btn">
                         + Tambah Produk Baru
