@@ -103,3 +103,133 @@
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(27, 59, 79, 0.2);
 }
+
+/* Modal Konfirmasi */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.confirm-modal {
+    max-width: 400px;
+    width: 90%;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(27, 59, 79, 0.3);
+    border: 2px solid var(--secondary);
+    animation: slideUp 0.3s ease;
+}
+
+.confirm-modal h3 {
+    color: var(--primary);
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px dashed var(--secondary);
+    padding-bottom: 15px;
+}
+
+.confirm-detail {
+    background: rgba(233, 196, 106, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.confirm-text {
+    color: var(--text);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.confirm-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.confirm-price {
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.confirm-stock {
+    color: var(--text-light);
+    font-size: 16px;
+}
+
+.stock-highlight {
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.confirm-actions button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+
+.confirm-actions .confirm-btn {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 5px 15px rgba(231, 111, 81, 0.3);
+}
+
+.confirm-actions .confirm-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(231, 111, 81, 0.4);
+}
+
+.confirm-actions .cancel-btn {
+    background: #95a5a6;
+    color: white;
+}
+
+.confirm-actions .cancel-btn:hover {
+    background: #7f8c8d;
+    transform: translateY(-3px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
