@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import "./Dashboard.css";
+import "./ProductManagement.css";
 
 function ProductManagement() {
     const navigate = useNavigate();
@@ -200,15 +201,15 @@ function ProductManagement() {
     if (loading) return <div className="loading">Loading produk...</div>;
 
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-header">
-                <h1>📚 Manajemen Produk</h1>
-                <div>
+        <div className="management-container">
+            <div className="management-header">
+                <h1> Manajemen Produk</h1>
+                <div className="header-actions">
                     <button onClick={() => navigate("/dashboard")} className="back-btn">
                          Kembali ke Dashboard
                     </button>
                     <button onClick={handleAddNew} className="add-btn">
-                        + Tambah Produk Baru
+                         Tambah Produk Baru
                     </button>
                 </div>
             </div>
@@ -317,17 +318,20 @@ function ProductManagement() {
                                     <img 
                                         src={product.cover_image || "https://via.placeholder.com/50x50?text=Buku"} 
                                         alt={product.title} 
-                                        style={{width: '50px', height: '50px', objectFit: 'cover', borderRadius: '5px'}} 
                                     />
                                 </td>
                                 <td>{product.title}</td>
                                 <td>{product.author}</td>
-                                <td>{product.categories?.name || '-'}</td>
+                                <td>
+                                    <span className="category-badge">
+                                        {product.categories?.name || '-'}
+                                    </span>
+                                </td>
                                 <td>Rp {product.price?.toLocaleString()}</td>
                                 <td>{product.stock}</td>
                                 <td>
-                                    <button onClick={() => handleEdit(product)}>✏️</button>
-                                    <button onClick={() => handleDelete(product.id)}>🗑️</button>
+                                    <button onClick={() => handleEdit(product)} title="Edit">✏️</button>
+                                    <button onClick={() => handleDelete(product.id)} title="Hapus">🗑️</button>
                                 </td>
                             </tr>
                         ))}

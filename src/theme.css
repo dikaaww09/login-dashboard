@@ -1,0 +1,22 @@
+:root {
+  /* TEMA NAVY & CREAM */
+  --primary: #1B3B4F;        /* Biru navy - untuk header, judul */
+  --primary-light: #2C5A73;   /* Biru lebih terang - untuk hover */
+  --secondary: #E9C46A;       /* Kuning mustard - untuk aksen */
+  --accent: #E76F51;          /* Oranye terracotta - untuk tombol penting */
+  --background: #F4F1DE;      /* Cream - background utama */
+  --text: #1B3B4F;            /* Biru navy - teks utama */
+  --text-light: #5E6F7D;      /* Abu kebiruan - teks sekunder */
+  --card-bg: #FFFFFF;         /* Putih - background card */
+  --shadow: rgba(27, 59, 79, 0.1); /* Shadow biru transparan */
+  
+  /* Font */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  /* Tombol back specific */
+  --back-btn-bg: transparent;
+  --back-btn-border: var(--secondary);
+  --back-btn-hover-bg: var(--secondary);
+  --back-btn-hover-color: var(--primary);
+}

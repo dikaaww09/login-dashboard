@@ -1,0 +1,286 @@
+/* ProductManagement.css */
+
+.management-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 25px;
+  background: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--shadow);
+  border-left: 5px solid var(--primary);
+}
+
+.management-header h1 {
+  color: var(--primary);
+  margin: 0;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.management-header h1::before {
+  content: "📚 ";
+  margin-right: 8px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Form Tambah Produk */
+.product-form {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px var(--shadow);
+  border: 1px solid rgba(233, 196, 106, 0.3);
+}
+
+.product-form h3 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 20px;
+  border-bottom: 2px solid var(--secondary);
+  padding-bottom: 10px;
+}
+
+.product-form form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s;
+  background: white;
+}
+
+.product-form input:focus,
+.product-form select:focus,
+.product-form textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(233, 196, 106, 0.2);
+}
+
+.product-form textarea {
+  grid-column: 1 / -1;
+  resize: vertical;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.form-actions button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form-actions button[type="submit"] {
+  background: var(--primary);
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.form-actions button[type="button"] {
+  background: #e74c3c;
+  color: white;
+}
+
+.form-actions button[type="button"]:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Tabel Produk */
+.products-table {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px var(--shadow);
+  overflow-x: auto;
+}
+
+.products-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+.products-table th {
+  background: var(--primary);
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.products-table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.products-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.products-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ecf0f1;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.products-table tr:hover {
+  background: rgba(233, 196, 106, 0.05);
+}
+
+.products-table td img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--secondary);
+}
+
+/* Input dalam mode edit */
+.products-table input,
+.products-table select {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.products-table input:focus,
+.products-table select:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
+/* Tombol aksi */
+.products-table button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 3px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.products-table button:first-of-type {
+  background: var(--secondary);
+  color: var(--primary);
+}
+
+.products-table button:first-of-type:hover {
+  background: #d4b15a;
+  transform: translateY(-2px);
+}
+
+.products-table button:last-of-type {
+  background: #e74c3c;
+  color: white;
+}
+
+.products-table button:last-of-type:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Tombol Add New */
+.add-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(27, 59, 79, 0.3);
+}
+
+.add-btn::before {
+  content: "➕";
+  font-size: 16px;
+}
+
+/* Badge kategori */
+.category-badge {
+  background: rgba(233, 196, 106, 0.2);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .management-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .product-form form {
+    grid-template-columns: 1fr;
+  }
+}
